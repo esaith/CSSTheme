@@ -1,0 +1,27 @@
+{
+  "name": "CSS Theme Color Modifier",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "Changes background color and theme",
+  "browser_action": {
+    "default_icon": "16HelloWorld.png",
+    "default_title": "CSS Theme Color Modifer",
+    "default_popup": "options.html"
+  },
+  "icons": {
+    "16": "16HelloWorld.png",
+    "48": "48HelloWorld.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [ "http://*/*", "https://*/*" ],
+      "js": ["scripts/content.js"],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "storage"
+  ]
+}
