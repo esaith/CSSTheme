@@ -1,6 +1,6 @@
 {
   "name": "CSS Theme Color Modifier",
-  "version": "1.1",
+  "version": "1.2",
   "manifest_version": 2,
   "description": "Changes background color and theme",
   "browser_action": {
