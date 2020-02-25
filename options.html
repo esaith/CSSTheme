@@ -1,64 +1,842 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-label { white-space: nowrap; }
-body {
-    background-color: #0ff;
-}
-</style>
-</head>
-<body>
-<table>
-    <tr>
-    	<td><label>Major Color 1: </label> </td>
-    	<td><input class="jscolor" id="majorcolor1"></td>
-    </tr>
-    <tr>
-        <td><label>Major Color 2: </label> </td>
-        <td><input class="jscolor" id="majorcolor2"></td>
-    </tr>
-    <tr>
-        <td><label>Minor Color 1: </label> </td>
-        <td><input class="jscolor" id="minorcolor1"></td>
-    </tr>
-    <tr>
-        <td><label>Minor Color 2: </label> </td>
-        <td><input class="jscolor" id="minorcolor2"></td>
-    </tr>
-    <tr>
-        <td><label>Minor Color 3: </label> </td>
-        <td><input class="jscolor" id="minorcolor3"></td>
-    </tr>
-    <tr>
-        <td><label>Detail Color 1: </label> </td>
-        <td><input class="jscolor" id="detailcolor1"></td>
-    </tr>
-    <tr>
-        <td><label>Detail Color 2: </label> </td>
-        <td><input class="jscolor" id="detailcolor2"></td>
-    </tr>
-    <tr>
-        <td><label>Detail Color 3: </label> </td>
-        <td><input class="jscolor" id="detailcolor3"></td>
-    </tr>
-    <tr>
-        <td><label>Detail Color 4: </label> </td>
-        <td><input class="jscolor" id="detailcolor4"></td>
-    </tr>
-    <tr>
-        <td><label>Detail Color 5: </label> </td>
-        <td><input class="jscolor" id="detailcolor5"></td>
-    </tr>
-    <tr>
-        <td><label>Lotmap Background Color </label> </td>
-        <td><input class="jscolor" id="lotmapBackgroundColor"></td>
-    </tr>
-</table>
-<button id="btnSubmit">Submit</button>
-<button id="btnReset">Reset</button> 
-<label id="status"></label>
-<script src="scripts/jscolor.min.js"></script>
-<script src="scripts/options.js"></script> 
-</body>
+  <head>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div class="tab-container">
+      <div class="tab" id="mainColorsTab">Main Colors</div>
+      <div class="tab" id="treasureMapTab">Treasure Map</div>
+      <div class="tab" id="globalHudTab">Global Hud</div>
+      <div class="tab" id="filterMenuTab">Filter Menu (General)</div>
+      <div class="tab" id="filterMenuFloorplansTab">Filter Menu (Floorplans)</div>
+      <div class="tab" id="dropDownTab">Drop down</div>
+      <div class="tab" id="cardsTab">Cards (General)</div>
+      <div class="tab" id="cardsFloorplansTab">Cards (Floorplans)</div>
+      <div class="tab" id="swipeNavTab">Swipe Navigation</div>
+      <div class="tab" id="radialTextMenuTab">Radial Text Menu</div>
+      <div class="tab" id="floorplanTab">Floorplan</div>
+      <div class="tab" id="registrationTab">Registration</div>
+      <div class="tab" id="energyEfficiencyTab">Energy Efficiency</div>
+      <div class="tab" id="locationTab">Location</div>
+      <div class="tab" id="scrollBarTab">Scroll Bar</div>
+      <div class="tab" id="authTab">Authoization</div>
+      <div class="tab" id="furnitureTab">Furniture</div>
+      <div class="tab" id="lotmapTab">Lot Map</div>
+      <div class="tab" id="brochureTab">Brochure</div>
+      <div class="tab" id="snapBackTab">Snapback</div>
+      <div class="tab" id="userProfileTab">User Profile</div>
+    </div>
+    <div id="mainColorsTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Major Color 1: </label></td>
+          <td><input class="jscolor" id="majorcolor1" /></td>
+        </tr>
+        <tr>
+          <td><label>Major Color 2: </label></td>
+          <td><input class="jscolor" id="majorcolor2" /></td>
+        </tr>
+        <tr>
+          <td><label>Minor Color 1: </label></td>
+          <td><input class="jscolor" id="minorcolor1" /></td>
+        </tr>
+        <tr>
+          <td><label>Minor Color 2: </label></td>
+          <td><input class="jscolor" id="minorcolor2" /></td>
+        </tr>
+        <tr>
+          <td><label>Minor Color 3: </label></td>
+          <td><input class="jscolor" id="minorcolor3" /></td>
+        </tr>
+        <tr>
+          <td><label>Detail Color 1: </label></td>
+          <td><input class="jscolor" id="detailcolor1" /></td>
+        </tr>
+        <tr>
+          <td><label>Detail Color 2: </label></td>
+          <td><input class="jscolor" id="detailcolor2" /></td>
+        </tr>
+        <tr>
+          <td><label>Detail Color 3: </label></td>
+          <td><input class="jscolor" id="detailcolor3" /></td>
+        </tr>
+        <tr>
+          <td><label>Detail Color 4: </label></td>
+          <td><input class="jscolor" id="detailcolor4" /></td>
+        </tr>
+        <tr>
+          <td><label>Detail Color 5: </label></td>
+          <td><input class="jscolor" id="detailcolor5" /></td>
+        </tr>
+        <tr>
+          <td><label>Lotmap Background Color </label></td>
+          <td><input class="jscolor" id="lotmapBackgroundColor" /></td>
+        </tr>
+      </table>
+    </div>
+    <div id="treasureMapTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Treasure Map Button Open Background Color (treasureMapBtnOpen-backgroundColor)</label></td>
+          <td><input class="jscolor" id="treasureMapBtnOpen-backgroundColor"/></td>
+        </tr>
+        <tr>
+            <td><label>Treasure Map Button Closed (treasureMapBtnClose-backgroundColor)</label></td>
+            <td><input class="jscolor" id="treasureMapBtnClose-backgroundColor" /></td>
+          </tr>
+        <tr>
+            <td><label>Left Bar Closed Color ($$leftBarClosed-color)</label></td>
+            <td><input class="jscolor" id="leftBarClosed-color"/></td>
+        </tr>
+        <tr>
+            <td><label>Left Bar Closed Background Color ($leftBarClosed-backgroundColor)</label></td>
+            <td><input class="jscolor" id="leftBarClosed-backgroundColor" /></td>
+        </tr>
+        <tr>
+            <td><label>Left Bar Open Color ($leftBarOpen-color)</label></td>
+            <td><input class="jscolor" id="leftBarOpen-color" data-type="color" /></td>
+        </tr>
+        <tr>
+            <td><label>Left Bar Open Background Color ($leftBarOpen-backgroundColor)</label></td>
+            <td><input class="jscolor" id="leftBarOpen-backgroundColor" /></td>
+        </tr>
+        <tr>
+            <td><label>Left Bar Open Small Item Background Color ($leftBarOpenMiniPage-backgroundColor)</label></td>
+            <td><input class="jscolor" id="leftBarOpenMiniPage-backgroundColor" /></td>
+        </tr>
+        
+        <tr>
+            <td><label>Left Bar Open Registration Button Color ($registration-color)</label></td>
+            <td><input class="jscolor" id="registration-color" /></td>
+        </tr>
+        <tr>
+            <td><label>Left Bar Open Registration Button BackgroundColor ($registration-backgroundColor)</label></td>
+            <td><input class="jscolor" id="registration-backgroundColor" /></td>
+        </tr>
+
+        <tr>
+            <td><label>Left Bar Open Registration Button Icon BackgroundColor ($registrationIcon-backgroundColor)</label></td>
+            <td><input class="jscolor" id="registrationIcon-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Left Bar Open Sales Rep Color ($salesRep-color)</label></td>
+          <td><input class="jscolor" id="salesRep-color" /></td>
+      </tr>
+        <tr>
+            <td><label>Treasure Map Not Visited Eye ($treasureMapPageNotVisitedEye-filter)</label></td>
+            <td><input class="jscolor" id="treasureMapPageNotVisitedEye-filter"  /></td>
+        </tr>
+        <tr>
+          <td><label>Treasure Map Not Visited Color ($treasureMapPageNotVisited-color)</label></td>
+          <td><input class="jscolor" id="treasureMapPageNotVisited-color"  /></td>
+      </tr>
+
+        <tr>
+            <td><label>Treasure Map Not Visited Eye Shadow ($treasureMapPageIconShadow-filter)</label></td>
+            <td><input class="jscolor" id="treasureMapPageIconShadow-filter"/></td>
+        </tr>
+        <tr>
+            <td><label>Treasure Map Visited Title Color (treasureMapPageVisited-color)</label></td>
+            <td><input class="jscolor" id="treasureMapPageVisited-color"/></td>
+        </tr>
+      </table>
+    </div>
+    <div id="globalHudTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Global Hud Closed Background Color (globalHudClosed-backgroundColor)</label></td>
+          <td><input class="jscolor" id="globalHudClosed-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Global Hud Open Background Color (globalHudOpen-backgroundColor)</label></td>
+          <td><input class="jscolor" id="globalHudOpen-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Global Hud Closed Icon Background Color (globalHudClosedIcon-backgroundColor)</label></td>
+          <td><input class="jscolor" id="globalHudClosedIcon-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Global Hud Open Pie Slice Background Color (globalHudOpenPieSlice-backgroundColor)</label></td>
+          <td><input class="jscolor" id="globalHudOpenPieSlice-backgroundColor"/></td>
+        </tr>              
+      </table>
+    </div>
+    <div id="filterMenuTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Filter Slider Left Background (filterslider-left-backgroundColor)</label></td>
+          <td><input class="jscolor" id="filterslider-left-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Filter Slider Right Background (filterslider-right-backgroundColor)</label></td>
+          <td><input class="jscolor" id="filterslider-right-backgroundColor"/></td>
+        </tr>  
+        <tr>
+          <td><label>Filter Slider border bottom color (filterslider-borderBottomColor)</label></td>
+          <td><input class="jscolor" id="filterslider-borderBottomColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Filter Slider label color (filterslider-label-color)</label></td>
+          <td><input class="jscolor" id="filterslider-label-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Filter Slider value color (filterslider-value-color)</label></td>
+          <td><input class="jscolor" id="filterslider-value-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Filter Slider bar background color (filterslider-bar-backgroundColor)</label></td>
+          <td><input class="jscolor" id="filterslider-bar-backgroundColor"/></td>
+        </tr>        
+      </table>
+    </div>
+    <div id="filterMenuFloorplansTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Floorplans Filter Header Color (filterslider-floorplans-header-color)</label></td>
+          <td><input class="jscolor" id="filterslider-floorplans-header-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplans Filter Header Background Color (filterslider-floorplans-header-backgroundColor)</label></td>
+          <td><input class="jscolor" id="filterslider-floorplans-header-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Floorplans Filter bottom border Color (filterslider-floorplans-header-borderBottomColor)</label></td>
+          <td><input class="jscolor" id="filterslider-floorplans-header-borderBottomColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Floorplans Filter Neighborhood color (filterslider-floorplans-neighborhood-color)</label></td>
+          <td><input class="jscolor" id="filterslider-floorplans-neighborhood-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Floorplans Filter Neighborhood background color (filterslider-floorplans-neighborhood-backgroundColor)</label></td>
+          <td><input class="jscolor" id="filterslider-floorplans-neighborhood-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Floorplans Filter Neighborhood Option color (filterslider-floorplans-neighborhood-option-color)</label></td>
+          <td><input class="jscolor" id="filterslider-floorplans-neighborhood-option-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Floorplans Filter Neighborhood Option background color (filterslider-floorplans-neighborhood-option-backgroundColor)</label></td>
+          <td><input class="jscolor" id="filterslider-floorplans-neighborhood-option-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Floorplans Filter Neighborhood Select color (filterslider-floorplans-neighborhood-selected-color)</label></td>
+          <td><input class="jscolor" id="filterslider-floorplans-neighborhood-selected-color"/></td>
+        </tr>
+      </table>
+    </div>
+    <div id="dropDownTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Dropdown Color (dropdown-control-color)</label></td>
+          <td><input class="jscolor" id="dropdown-control-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Dropdown Color - Active (dropdown-controlColor-active)</label></td>
+          <td><input class="jscolor" id="dropdown-controlColor-active"/></td>
+        </tr> 
+        <tr>
+          <td><label>Dropdown placeholder color (dropdown-placeholder-color)</label></td>
+          <td><input class="jscolor" id="dropdown-placeholder-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Dropdown icon background color (dropdown-icon-backgroundColor)</label></td>
+          <td><input class="jscolor" id="dropdown-icon-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Dropdown list color (dropdown-list-color)</label></td>
+          <td><input class="jscolor" id="dropdown-list-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Dropdown list color - hover (dropdown-list-color-hover)</label></td>
+          <td><input class="jscolor" id="dropdown-list-color-hover"/></td>
+        </tr> 
+        <tr>
+          <td><label>Dropdown borderColor (dropdown-borderColor)</label></td>
+          <td><input class="jscolor" id="dropdown-borderColor"/></td>
+        </tr> 
+      </table>
+    </div>
+    <div id="cardsTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Cards label color (card-label-color)</label></td>
+          <td><input class="jscolor" id="card-label-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Cards value color (card-value-color)</label></td>
+          <td><input class="jscolor" id="card-value-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Cards background color (card-backgroundColor)</label></td>
+          <td><input class="jscolor" id="card-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Cards image background color (card-image-backgroundColor)</label></td>
+          <td><input class="jscolor" id="card-image-backgroundColor"/></td>
+        </tr> 
+      </table>
+    </div>
+    <div id="cardsFloorplansTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Floorplans Cards title color (card-floorplan-title-color)</label></td>
+          <td><input class="jscolor" id="card-floorplan-title-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplans Cards title background color (card-floorplan-title-backgroundColor)</label></td>
+          <td><input class="jscolor" id="card-floorplan-title-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplans Cards background color (card-floorplan-backgroundColor)</label></td>
+          <td><input class="jscolor" id="card-floorplan-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplans Cards specification label color (card-floorplan-specLabel-color)</label></td>
+          <td><input class="jscolor" id="card-floorplan-specLabel-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplans Cards specification value color (card-floorplan-specValue-color)</label></td>
+          <td><input class="jscolor" id="card-floorplan-specValue-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplans Cards specification border color (card-floorplan-specborderColor)</label></td>
+          <td><input class="jscolor" id="card-floorplan-specborderColor"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div id="swipeNavTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Swipe background color (swipeNav-backgroundColor)</label></td>
+          <td><input class="jscolor" id="swipeNav-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Swipe background tail color (swipeNav-3dBackgroundShadow-backgroundColor)</label></td>
+          <td><input class="jscolor" id="swipeNav-3dBackgroundShadow-backgroundColor"/></td>
+        </tr> 
+        <tr>
+          <td><label>Swipe border color (swipeNav-middleBorderColor)</label></td>
+          <td><input class="jscolor" id="swipeNav-middleBorderColor"/></td>
+        </tr>                 
+      </table>
+    </div>
+    <div id="radialTextMenuTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Radial Text Menu quarter circle fill (rtmenu-quarter-circle-fill)</label></td>
+          <td><input class="jscolor" id="rtmenu-quarter-circle-fill"/></td>
+        </tr> 
+        <tr>
+          <td><label>Radial Text Menu category color (rtmenu-category-color)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Radial Text Menu category background color (rtmenu-category-backgroundColor)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-backgroundColor"/></td>
+        </tr>      
+        <tr>
+          <td><label>Radial Text Menu item color (rtmenu-category-item-color)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-item-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Radial Text Menu item color hover (rtmenu-category-item-color-hover)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-item-color-hover"/></td>
+        </tr>      
+        <tr>
+          <td><label>Radial Text Menu item background color (rtmenu-category-item-backgroundColor)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-item-backgroundColor"/></td>
+        </tr>      
+        <tr>
+          <td><label>Radial Text Menu item background color hover (rtmenu-category-item-backgroundColor-hover)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-item-backgroundColor-hover"/></td>
+        </tr>      
+        <tr>
+          <td><label>Radial Text Menu item background color disabled (rtmenu-category-item-backgroundColor-disabled)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-item-backgroundColor-disabled"/></td>
+        </tr>      
+        <tr>
+          <td><label>Radial Text Menu item circle fill (rtmenu-category-itemCircle-fill)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-itemCircle-fill"/></td>
+        </tr>      
+        <tr>
+          <td><label>Radial Text Menu item circle fill hover (rtmenu-category-itemCircle-fill-hover)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-itemCircle-fill-hover"/></td>
+        </tr>      
+        <tr>
+          <td><label>Radial Text Menu item circle stroke (rtmenu-category-itemCircle-stroke)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-itemCircle-stroke"/></td>
+        </tr>      
+        <tr>
+          <td><label>Radial Text Menu item circle stroke hover (rtmenu-category-itemCircle-stroke-hover)</label></td>
+          <td><input class="jscolor" id="rtmenu-category-itemCircle-stroke-hover"/></td>
+        </tr>      
+      </table>
+    </div>
+    <div id="floorplanTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Floorplan Specs title shadow color (floorplan-specs-titleShadow-color)</label></td>
+          <td><input class="jscolor" id="floorplan-specs-titleShadow-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplan Specs color (floorplan-specs-color)</label></td>
+          <td><input class="jscolor" id="floorplan-specs-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplan Specs Info Shadow color (floorplan-specs-infoShadow-color)</label></td>
+          <td><input class="jscolor" id="floorplan-specs-infoShadow-color"/></td>
+        </tr> 
+        <tr>
+          <td><label>Floorplan Specs Info value color (floorplan-specs-infoValue-color)</label></td>
+          <td><input class="jscolor" id="floorplan-specs-infoValue-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Floorplan Specs Info border color (floorplan-specs-info-borderColor)</label></td>
+          <td><input class="jscolor" id="floorplan-specs-info-borderColor"/></td>
+        </tr>
+      </table>
+    </div>
+    <div id="registrationTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Complete Registration background Color(completeRegistrationButton-backgroundColor)</label></td>
+          <td><input class="jscolor" id="completeRegistrationButton-backgroundColor"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div id="energyEfficiencyTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Color (energyEfficiency-color)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Hotspot Pulse Border (energyEfficiency-hotspot-pulse-borderColor)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-hotspot-pulse-borderColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Hotspot Pulse background color (energyEfficiency-hotspot-pulse-backgroundColor)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-hotspot-pulse-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Side Menu Color (energyEfficiency-sideMenu-color)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-sideMenu-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Side Menu Index Color (energyEfficiency-sideMenu-categoryIndex-color)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-sideMenu-categoryIndex-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Side Menu Index background color (energyEfficiency-sideMenu-categoryIndex-backgroundColor)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-sideMenu-categoryIndex-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Side Menu Index color - selected (energyEfficiency-sideMenu-categoryIndex-color-selected)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-sideMenu-categoryIndex-color-selected"/></td>
+        </tr>         
+        <tr>
+          <td><label>Side Menu Index background color - selected (energyEfficiency-sideMenu-categoryIndex-backgroundColor-selected)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-sideMenu-categoryIndex-backgroundColor-selected"/></td>
+        </tr>         
+        <tr>
+          <td><label>Side Menu Content Color (energyEfficiency-sideMenu-content-color)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-sideMenu-content-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Side Menu Content Background Color (energyEfficiency-sideMenu-content-backgroundColor)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-sideMenu-content-backgroundColor"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div id="locationTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Map Mode background color (energyEfficiency-color)</label></td>
+          <td><input class="jscolor" id="energyEfficiency-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Marker Info header background color(location-markerInfo-header-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-markerInfo-header-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Marker Info color(location-markerInfo-color)</label></td>
+          <td><input class="jscolor" id="location-markerInfo-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Marker Info background color(location-markerInfo-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-markerInfo-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Marker Info favorite background color(location-markerInfo-favButton-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-markerInfo-favButton-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Marker Info favorite tail background color(location-markerInfo-favButton-tail-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-markerInfo-favButton-tail-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker Header color (location-addMarkerForm-header-color)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-header-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker Header background color (location-addMarkerForm-header-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-header-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker color (location-addMarkerForm-color)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker background color (location-addMarkerForm-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker label color (location-addMarkerForm-label-color)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-label-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker input color (location-addMarkerForm-input-color)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-input-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker input background color (location-addMarkerForm-input-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-input-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker placeholder color (location-addMarkerForm-input-placeholder-color)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-input-placeholder-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker submit button color (location-addMarkerForm-submitBtn-color)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-submitBtn-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker submit button background color (location-addMarkerForm-submitBtn-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-submitBtn-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker bottom arrow color (location-addMarkerForm-bottomArrow-color)</label></td>
+          <td><input class="jscolor" id="location-addMarkerForm-bottomArrow-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Add Marker submit button backgroundColor (location-addMarkerBtn-backgroundColor)</label></td>
+          <td><input class="jscolor" id="location-addMarkerBtn-backgroundColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Community Map color (location-communityMap-color)</label></td>
+          <td><input class="jscolor" id="location-communityMap-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Community Map text shadow color (location-communityMap-textShadowColor)</label></td>
+          <td><input class="jscolor" id="location-communityMap-textShadowColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Community Map border bottom color (location-communityMap-borderBottomColor)</label></td>
+          <td><input class="jscolor" id="location-communityMap-borderBottomColor"/></td>
+        </tr>
+        <tr>
+          <td><label>Community Offline Color (location-offlineMessage-color)</label></td>
+          <td><input class="jscolor" id="location-offlineMessage-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Community Offline Color - hover (location-offlineMessage-color-hover)</label></td>
+          <td><input class="jscolor" id="location-offlineMessage-color-hover"/></td>
+        </tr>
+        
+            
+      </table>
+    </div>
+    <div id="scrollBarTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Track bar Background Color(scroll-bar-track-backgroundColor)</label></td>
+          <td><input class="jscolor" id="scroll-bar-track-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Thumb Background Color(scroll-bar-thumb-backgroundColor)</label></td>
+          <td><input class="jscolor" id="scroll-bar-thumb-backgroundColor"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div id="authTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Login Form Background color (loginForm-backgroundColor)</label></td>
+          <td><input class="jscolor" id="loginForm-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form header color (loginForm-header-color)</label></td>
+          <td><input class="jscolor" id="loginForm-header-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form header background color (loginForm-header-backgroundColor)</label></td>
+          <td><input class="jscolor" id="loginForm-header-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form Submit Button color (loginForm-submitBtn-color)</label></td>
+          <td><input class="jscolor" id="loginForm-submitBtn-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form Submit Button background color (loginForm-submitBtn-backgroundColor)</label></td>
+          <td><input class="jscolor" id="loginForm-submitBtn-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form input color (loginForm-input-color)</label></td>
+          <td><input class="jscolor" id="loginForm-input-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form input placeholder color (loginForm-input-placeHolderColor)</label></td>
+          <td><input class="jscolor" id="loginForm-input-placeHolderColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form input background color (loginForm-input-borderBottomColor)</label></td>
+          <td><input class="jscolor" id="loginForm-input-borderBottomColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form invalid background color (loginForm-input-invalid-backgroundColor)</label></td>
+          <td><input class="jscolor" id="loginForm-input-invalid-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Login Form invalid border color (loginForm-input-invalid-borderColor)</label></td>
+          <td><input class="jscolor" id="loginForm-input-invalid-borderColor"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div id="furnitureTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Category content color (furnitureMenu-category-content-popout-color)</label></td>
+          <td><input class="jscolor" id="furnitureMenu-category-content-popout-color"/></td>
+        </tr>
+        <tr>
+          <td><label>Background Color (furnitureMenu-backgroundColor)</label></td>
+          <td><input class="jscolor" id="furnitureMenu-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Group Text Annotation Color (furnitureMenu-group-textAnnotation-color)</label></td>
+          <td><input class="jscolor" id="furnitureMenu-group-textAnnotation-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Category content popoput background color (furnitureMenu-category-content-popout-backgroundColor)</label></td>
+          <td><input class="jscolor" id="furnitureMenu-category-content-popout-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Category content popoput arrow color (furnitureMenu-category-content-popout-arrow-color)</label></td>
+          <td><input class="jscolor" id="furnitureMenu-category-content-popout-arrow-color"/></td>
+        </tr>        
+        <tr>
+          <td><label>Category content popoput border color (furnitureMenu-category-content-popout-borderColor)</label></td>
+          <td><input class="jscolor" id="furnitureMenu-category-content-popout-borderColor"/></td>
+        </tr>    
+      </table>
+    </div>
+    <div id="lotmapTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Background Color (lotmap-backgroundColor)</label></td>
+          <td><input class="jscolor" id="lotmap-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Favorite Color (lotmap-favorite-color)</label></td>
+          <td><input class="jscolor" id="lotmap-favorite-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Fullmap color (lotmap-fullMap-color)</label></td>
+          <td><input class="jscolor" id="lotmap-fullMap-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Fullmap background color (lotmap-fullMap-backgroundColor)</label></td>
+          <td><input class="jscolor" id="lotmap-fullMap-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot details color (lotmap-lotDetails-color)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-color"/></td>
+        </tr>  
+        <tr>
+          <td><label>Lot details background color (lotmap-lotDetails-backgroundColor)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot details title color (lotmap-lotDetails-title-color)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-title-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot details title background color (lotmap-lotDetails-title-backgroundColor)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-title-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot details field border color (lotmap-lotDetails-field-borderColor)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-field-borderColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot details field background color (lotmap-lotDetails-field-backgroundColor)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-field-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot details field label color (lotmap-lotDetails-field-label-color)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-field-label-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot details field value color (lotmap-lotDetails-field-value-color)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-field-value-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot details Management Map borderColor (lotmap-lotDetails-managementMap-borderColor)</label></td>
+          <td><input class="jscolor" id="lotmap-lotDetails-managementMap-borderColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot Filter Color (lotmap-filterOptions-color)</label></td>
+          <td><input class="jscolor" id="lotmap-filterOptions-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot Filter background Color (lotmap-filterOptions-backgroundColor)</label></td>
+          <td><input class="jscolor" id="lotmap-filterOptions-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot Filter header bottom border color (lotmap-filterOptions-header-bottomBorder)</label></td>
+          <td><input class="jscolor" id="lotmap-filterOptions-header-bottomBorder"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot Map Status top border color (lotmap-status-topBorderColor)</label></td>
+          <td><input class="jscolor" id="lotmap-status-topBorderColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot Map Status text color (lotmap-status-color)</label></td>
+          <td><input class="jscolor" id="lotmap-status-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot Map Status selected lot stroke color (lotmap-selectedLot-stroke)</label></td>
+          <td><input class="jscolor" id="lotmap-selectedLot-stroke"/></td>
+        </tr>         
+        <tr>
+          <td><label>Lot Map Status selected lot fill color (lotmap-selectedLot-fill)</label></td>
+          <td><input class="jscolor" id="lotmap-selectedLot-fill"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div id="brochureTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Color (brochure-color)</label></td>
+          <td><input class="jscolor" id="brochure-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Background Color (brochure-backgroundColor)</label></td>
+          <td><input class="jscolor" id="brochure-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Card Row Title Color (brochure-cardRow-title-color)</label></td>
+          <td><input class="jscolor" id="brochure-cardRow-title-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Card Row Title background Color (brochure-cardRow-title-backgroundColor)</label></td>
+          <td><input class="jscolor" id="brochure-cardRow-title-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Card Row Elevation Color (brochure-cardRow-elevation-color)</label></td>
+          <td><input class="jscolor" id="brochure-cardRow-elevation-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Card Row Elevation background color (brochure-cardRow-elevation-backgroundColor)</label></td>
+          <td><input class="jscolor" id="brochure-cardRow-elevation-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Card Row Info background color (brochure-cardRow-elevation-info-backgroundColor)</label></td>
+          <td><input class="jscolor" id="brochure-cardRow-elevation-info-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Card Row Info label color (brochure-cardRow-elevation-info-label-color)</label></td>
+          <td><input class="jscolor" id="brochure-cardRow-elevation-info-label-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Card Row Info value color (brochure-cardRow-elevation-info-value-color)</label></td>
+          <td><input class="jscolor" id="brochure-cardRow-elevation-info-value-color"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div id="snapBackTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Background Color (snapback-backgroundColor)</label></td>
+          <td><input class="jscolor" id="snapback-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Middle spacer color (snapback-middleSpacer-color)</label></td>
+          <td><input class="jscolor" id="snapback-middleSpacer-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Link Color (snapback-link-color)</label></td>
+          <td><input class="jscolor" id="snapback-link-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Background Color (snapback-link-backgroundColor)</label></td>
+          <td><input class="jscolor" id="snapback-link-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Bottom Border (snapback-link-bottomBorderColor)</label></td>
+          <td><input class="jscolor" id="snapback-link-bottomBorderColor"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div id="userProfileTabContent" class="tab-content">
+      <table>
+        <tr>
+          <td><label>Column Color (userProfile-column-color)</label></td>
+          <td><input class="jscolor" id="userProfile-column-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Column background color (userProfile-column-backgroundColor)</label></td>
+          <td><input class="jscolor" id="userProfile-column-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Column header background color (userProfile-column-header-backgroundColor)</label></td>
+          <td><input class="jscolor" id="userProfile-column-header-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Column icon background color (userProfile-icon-backgroundColor)</label></td>
+          <td><input class="jscolor" id="userProfile-icon-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Column input color (userProfile-input-color)</label></td>
+          <td><input class="jscolor" id="userProfile-input-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Column input placeholder color (userProfile-input-placeholder)</label></td>
+          <td><input class="jscolor" id="userProfile-input-placeholder"/></td>
+        </tr>         
+        <tr>
+          <td><label>Column input background color (userProfile-input-backgroundColor)</label></td>
+          <td><input class="jscolor" id="userProfile-input-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Register Button Color (userProfile-registerBtn-color)</label></td>
+          <td><input class="jscolor" id="userProfile-registerBtn-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Register Button background Color (userProfile-registerBtn-backgroundColor)</label></td>
+          <td><input class="jscolor" id="userProfile-registerBtn-backgroundColor"/></td>
+        </tr>         
+        <tr>
+          <td><label>Auto Complete Color (userProfile-autoComplete-color)</label></td>
+          <td><input class="jscolor" id="userProfile-autoComplete-color"/></td>
+        </tr>         
+        <tr>
+          <td><label>Auto Complete background Color (userProfile-autoComplete-backgroundColor)</label></td>
+          <td><input class="jscolor" id="userProfile-autoComplete-backgroundColor"/></td>
+        </tr>         
+      </table>
+    </div>
+    <div class="bottom">
+      <button id="btnSubmit">Submit</button>
+      <button id="btnReset">Reset</button>
+      <label id="status"></label>
+    </div>
+    <script src="scripts/options.js"></script>
+    <script src="scripts/jscolor.js"></script>
+    <link rel="stylesheet" type="text/css" href="scripts/style.css"></script>
+  </body>
 </html>
