@@ -1,6 +1,5 @@
 .high-light-option {
     box-shadow: inset 0px 0px 8px 1px yellow;
-    box-sizing: border-box;
     animation: 1s linear 1s infinite alternate borderHighlight;
 }
 

@@ -17,77 +17,187 @@ var MediaLabColorModule = (function () {
 
   applyColors = function (userEvent) {
     // { EVENT: EVENTS.SINGLE, TYPE: EVENT_TYPE.MOUSEOVER, VALUE: property }
-    if (userEvent.EVENT === EVENTS.ALL) {
+
+    if (settingColors(userEvent)) {
       if (!baseColors) {
         baseColors = JSON.parse(JSON.stringify(userEvent.VALUE[0]));
       } else {
         setBaseColors(userEvent.VALUE[0]);
-
-        for (const category of userEvent.VALUE) {
-
-          if (category.id === "mainColors")
-            continue;
-
-          for (const segment of category.properties) {
-            let index = segment.Property.lastIndexOf("-");
-            let elementAttrValue = segment.Property.substring(0, index);
-            const cssProperty = segment.Property.substring(index + 1);
-            const hex = segment.Value;
-
-            if (cssProperty !== 'color'
-              && cssProperty !== 'backgroundColor'
-              && cssProperty !== 'filter'
-              && cssProperty !== 'borderBottomColor'
-            ) {
-              console.log('Color update may not work: ' + cssProperty);
-            }
-            else {
-              const elements = document.querySelectorAll("[theme-id='" + elementAttrValue + "']");
-              for (const element of elements) {
-                element.style[cssProperty] = hex;
-              }
-            }
-          }
-        }
+        setColorsToIds(userEvent.VALUE);
       }
-    } else {// EVENT.SINGLE
-      if (userEvent.TYPE === EVENT_TYPE.MOUSEOVER) {
-        highlight(userEvent);
-      } else {
-        unhighlight(userEvent);
+    } else if (mouseEvent(userEvent)) {
+      switch (userEvent.TYPE) {
+        case EVENT_TYPE.MOUSEOVER:
+          highlight(userEvent);
+          break;
+        case EVENT_TYPE.MOUSEOUT:
+          unhighlight(userEvent);
+          break;
+        default:
+          console.log("Unable to read mouse event", userEvent);
       }
     }
   };
 
-  function highlight(event) {
-    if (event.VALUE.Property.indexOf("-") > -1) {
-      // specific element
-      let index = event.VALUE.Property.lastIndexOf("-");
-      let elementAttrValue = event.VALUE.Property.substring(0, index);
+  function settingColors(userEvent) {
+    return userEvent.EVENT === EVENTS.ALL;
+  }
 
-      const elements = document.querySelectorAll("[theme-id='" + elementAttrValue + "']");
-      for (const element of elements) {
-        element.classList.add('high-light-option');
+  function mouseEvent(userEvent) {
+    return userEvent.TYPE === EVENT_TYPE.MOUSEOVER || userEvent.TYPE === EVENT_TYPE.MOUSEOUT;
+  }
+
+  function setColorsToIds(categories) {
+    for (const category of categories) {
+
+      if (category.id === "mainColors")
+        continue;
+
+      for (const element of category.elements) {
+        if (!element.Value)
+          continue;
+
+        for (let property of element.Property) {
+          var isBefore = property.indexOf('-before') > -1;
+          var isAfter = property.indexOf('-after') > -1;
+
+          if (isBefore) property = property.replace('-before', '');
+          if (isAfter) property = property.replace('-after', '');
+
+          let index = property.lastIndexOf("-");
+          let elementAttrValue = property.substring(0, index);
+          const cssProperty = property.substring(index + 1);
+          const hex = element.Value;
+
+          const htmlElements = document.querySelectorAll("[theme-id='" + elementAttrValue + "']");
+          for (const htmlElement of htmlElements) {
+            if (isBefore) updatePsuedoElement(htmlElement, "before", cssProperty, hex);
+            if (isAfter) updatePsuedoElement(htmlElement, "after", cssProperty, hex);
+
+            if (!isBefore && !isAfter)
+              htmlElement.style[cssProperty] = hex;
+          }
+        }
       }
-    } else {
-      // Main Color
     }
+  }
+
+  function updatePsuedoElement(element, psudeo, cssProperty, hex) {
+    var path = getParentPathToRoot(element, "");
+    removeOldRule(path + '::' + psudeo);
+    document.styleSheets[0].insertRule(path + ':' + psudeo + ' { ' + camelCaseToDash(cssProperty) + ': ' + hex + ' }');
+  }
+
+  function camelCaseToDash(cssProperty) {
+    var result = "";
+    for (let char of cssProperty) {
+      if (char === char.toUpperCase()) {
+        result += '-' + char.toLowerCase();
+      } else {
+        result += char;
+      }
+    }
+
+    return result;
+  }
+
+  function removeOldRule(path) {
+    let index = Array.from(document.styleSheets[0].cssRules).findIndex((rule) => rule.selectorText == path);
+    if (index > -1)
+      document.styleSheets[0].deleteRule(index);
+  }
+
+  function getParentPathToRoot(element, path) {
+    if (element.tagName !== 'BODY') {
+      path = (element.classList.length > 0 ? "." + element.classList[0] : '') + " " + path;
+      return getParentPathToRoot(element.parentNode, path);
+    }
+    else {
+      return path.trim();
+    }
+  }
+
+  function highlight(event) {
+    baseHighlight('add', event);
   }
 
   function unhighlight(event) {
-    if (event.VALUE.Property.indexOf("-") > -1) {
-      // specific element
-      let index = event.VALUE.Property.lastIndexOf("-");
-      let elementAttrValue = event.VALUE.Property.substring(0, index);
+    baseHighlight('remove', event);
+  }
 
-      const elements = document.querySelectorAll("[theme-id='" + elementAttrValue + "']");
-      for (const element of elements) {
-        element.classList.remove('high-light-option');
+  function baseHighlight(addRemove, event) {
+    for (const property of event.VALUE.Property) {
+      if (isSpecificId(property)) {
+        let index = property.lastIndexOf("-");
+        let elementAttrValue = property.substring(0, index);
+
+        const elements = document.querySelectorAll("[theme-id='" + elementAttrValue + "']");
+        for (let element of elements) {
+          if (withinSvg(element)) element = getToParentSvg(element);
+          addRemoveHighlight(element, addRemove);
+        }
+      } else {
+        var elements = document.getElementsByTagName("*");
+        for (var element of elements) {
+          var tagName = element.tagName.toLowerCase();
+          var isLot = element.hasAttribute("data-lotId");
+
+          if (!tagIgnored(tagName, isLot)) {
+            var computedStyle = window.getComputedStyle(element, null);
+            var bgColor = rgbToHex(computedStyle.getPropertyValue("background")).toLowerCase();
+            var bgColorColor = rgbToHex(computedStyle.getPropertyValue("background-color")).toLowerCase();
+            var fillColor = rgbToHex(computedStyle.getPropertyValue("fill")).toLowerCase();
+            var strokeColor = rgbToHex(computedStyle.getPropertyValue("stroke")).toLowerCase();
+            var colorColor = rgbToHex(computedStyle.getPropertyValue("color")).toLowerCase();
+            var color = event.VALUE.Value.toLowerCase();
+
+            switch (color) {
+              case bgColor:
+              case bgColorColor:
+              case strokeColor:
+              case fillColor:
+              case colorColor:
+                addRemoveHighlight(element, addRemove)
+              default:
+            }
+          }
+        }
       }
-    } else {
-      // Main Color
     }
   }
+
+  function isSpecificId(property) {
+    return property.indexOf("-") > -1;
+  }
+
+  function tagIgnored(tagName, isLot) {
+    return tagName != "html" && tagName != "head" && tagName != "style"
+      && tagName != "script" && tagName != "meta" && !isLot
+  }
+
+  function addRemoveHighlight(element, addRemove) {
+    if (addRemove === 'add')
+      element.classList.add('high-light-option');
+    else
+      element.classList.remove('high-light-option');
+  }
+
+  function withinSvg(element) {
+    return element.tagName.indexOf('path') > -1
+      || element.tagName.indexOf('rect') > -1
+      || element.tagName.indexOf('g') > -1
+      || element.tagName.indexOf('polygon') > -1
+      || element.tagName.indexOf('line') > -1;
+  }
+
+  function getToParentSvg(element) {
+    if (element.tagName !== 'svg') {
+      return getToParentSvg(element.parentNode);
+    } else {
+      return element;
+    }
+  }
+
 
   function setBaseColors(newMainColors) {
     var elements = document.getElementsByTagName("*");
@@ -95,29 +205,25 @@ var MediaLabColorModule = (function () {
       var tagName = element.tagName.toLowerCase();
       var isLot = element.hasAttribute("data-lotId");
 
-      var computedStyle = window.getComputedStyle(element, null);
-      var bgColor = rgbToHex(computedStyle.getPropertyValue("background")).toLowerCase();
-      var bgColorColor = rgbToHex(computedStyle.getPropertyValue("background-color")).toLowerCase();
-      var fillColor = rgbToHex(computedStyle.getPropertyValue("fill")).toLowerCase();
-      var strokeColor = rgbToHex(computedStyle.getPropertyValue("stroke")).toLowerCase();
-      var colorColor = rgbToHex(computedStyle.getPropertyValue("color")).toLowerCase();
+      if (!tagIgnored(tagName, isLot)) {
+        var computedStyle = window.getComputedStyle(element, null);
+        var bgColor = rgbToHex(computedStyle.getPropertyValue("background")).toLowerCase();
+        var bgColorColor = rgbToHex(computedStyle.getPropertyValue("background-color")).toLowerCase();
+        var fillColor = rgbToHex(computedStyle.getPropertyValue("fill")).toLowerCase();
+        var strokeColor = rgbToHex(computedStyle.getPropertyValue("stroke")).toLowerCase();
+        var colorColor = rgbToHex(computedStyle.getPropertyValue("color")).toLowerCase();
 
-      if (tagName != "html" && tagName != "head" && tagName != "style"
-        && tagName != "script" && tagName != "meta" && !isLot
-      ) {
-        for (let i = 0; i < newMainColors.properties.length; ++i) {
-          var newColor = newMainColors.properties[i].Value.toLowerCase();
-          var currentColor = baseColors.properties[i].Value.toLowerCase();
+        for (let i = 0; i < newMainColors.elements.length; ++i) {
+          var newColor = newMainColors.elements[i].Value.toLowerCase();
+          var currentColor = baseColors.elements[i].Value.toLowerCase();
 
           if (newColor !== currentColor) {
             switch (currentColor) {
               case bgColor:
                 element.style.background = newColor;
-                console.log("Updated background: ", newColor, element);
                 break;
               case bgColorColor:
                 element.style.backgroundColor = newColor;
-                console.log("Updated backgroundColor: ", newColor, element);
                 break;
               case strokeColor:
                 element.style.stroke = newColor;
@@ -131,7 +237,6 @@ var MediaLabColorModule = (function () {
               default:
             }
           }
-
         }
       }
     }

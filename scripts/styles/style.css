@@ -74,6 +74,7 @@ body {
 
 .top .button-content button {
     margin: 0 10px;
+    user-select: none;
 }
 
 .bottom {
@@ -84,4 +85,9 @@ body {
 
 td {
     padding: 10px 0;
+}
+
+.property-name {
+    max-width: 350px;
+    white-space: normal;
 }
