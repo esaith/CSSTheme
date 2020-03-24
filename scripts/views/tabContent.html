@@ -1,0 +1,15 @@
+<div id="{{tab.id + 'TabContent'}}" class="tab-content">
+    <table>
+        <tr ng-repeat="prop in tab.properties">
+            <td>
+                <div ng-mouseover="mouseOver(prop)" ng-mouseout="mouseOut(prop)">
+                    <div>{{prop.Name}}</div>
+                    <div>({{prop.Property}})</div>
+                </div>
+            </td>
+            <td>
+                <color-picker ng-model="prop.Value"></color-picker>
+            </td>
+        </tr>
+    </table>
+</div>
