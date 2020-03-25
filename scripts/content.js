@@ -60,26 +60,33 @@ var MediaLabColorModule = (function () {
         for (let property of element.Property) {
           var isBefore = property.indexOf('-before') > -1;
           var isAfter = property.indexOf('-after') > -1;
+          var isTextShadow = property.indexOf('-textShadow') > -1;
 
           if (isBefore) property = property.replace('-before', '');
           if (isAfter) property = property.replace('-after', '');
+          if (isTextShadow) property = property.replace('-textShadow', '');
 
           let index = property.lastIndexOf("-");
-          let elementAttrValue = property.substring(0, index);
+          let elementAttrValue = index > -1 ? property.substring(0, index) : property;
           const cssProperty = property.substring(index + 1);
-          const hex = element.Value;
+          const hex = element.Value === '#000001' ? 'transparent' : element.Value;
 
           const htmlElements = document.querySelectorAll("[theme-id='" + elementAttrValue + "']");
           for (const htmlElement of htmlElements) {
             if (isBefore) updatePsuedoElement(htmlElement, "before", cssProperty, hex);
             if (isAfter) updatePsuedoElement(htmlElement, "after", cssProperty, hex);
+            if (isTextShadow) updateTextShadow(htmlElement, cssProperty, hex);
 
-            if (!isBefore && !isAfter)
+            if (!isBefore && !isAfter && !isTextShadow)
               htmlElement.style[cssProperty] = hex;
           }
         }
       }
     }
+  }
+
+  function updateTextShadow(htmlElement, cssProperty, hex) {
+    htmlElement.style.textShadow = '0 0 30px ' + hex + ', 0 1px 3px ' + hex;
   }
 
   function updatePsuedoElement(element, psudeo, cssProperty, hex) {
@@ -137,13 +144,13 @@ var MediaLabColorModule = (function () {
           addRemoveHighlight(element, addRemove);
         }
       } else {
-        var elements = document.getElementsByTagName("*");
-        for (var element of elements) {
-          var tagName = element.tagName.toLowerCase();
-          var isLot = element.hasAttribute("data-lotId");
+        var htmlElements = document.getElementsByTagName("*");
+        for (var htmlElement of htmlElements) {
+          var tagName = htmlElement.tagName.toLowerCase();
+          var isLot = htmlElement.hasAttribute("data-lotId");
 
           if (!tagIgnored(tagName, isLot)) {
-            var computedStyle = window.getComputedStyle(element, null);
+            var computedStyle = window.getComputedStyle(htmlElement, null);
             var bgColor = rgbToHex(computedStyle.getPropertyValue("background")).toLowerCase();
             var bgColorColor = rgbToHex(computedStyle.getPropertyValue("background-color")).toLowerCase();
             var fillColor = rgbToHex(computedStyle.getPropertyValue("fill")).toLowerCase();
@@ -157,7 +164,7 @@ var MediaLabColorModule = (function () {
               case strokeColor:
               case fillColor:
               case colorColor:
-                addRemoveHighlight(element, addRemove)
+                addRemoveHighlight(htmlElement, addRemove)
               default:
             }
           }
@@ -171,15 +178,19 @@ var MediaLabColorModule = (function () {
   }
 
   function tagIgnored(tagName, isLot) {
-    return tagName != "html" && tagName != "head" && tagName != "style"
-      && tagName != "script" && tagName != "meta" && !isLot
+    return tagName === "html"
+      || tagName === "head"
+      || tagName === "style"
+      || tagName === "script"
+      || tagName === "meta"
+      || isLot;
   }
 
-  function addRemoveHighlight(element, addRemove) {
+  function addRemoveHighlight(htmlElement, addRemove) {
     if (addRemove === 'add')
-      element.classList.add('high-light-option');
+      htmlElement.classList.add('high-light-option');
     else
-      element.classList.remove('high-light-option');
+      htmlElement.classList.remove('high-light-option');
   }
 
   function withinSvg(element) {
@@ -215,6 +226,9 @@ var MediaLabColorModule = (function () {
 
         for (let i = 0; i < newMainColors.elements.length; ++i) {
           var newColor = newMainColors.elements[i].Value.toLowerCase();
+          if (newColor === '#000001')
+            newColor = 'transparent';
+
           var currentColor = baseColors.elements[i].Value.toLowerCase();
 
           if (newColor !== currentColor) {

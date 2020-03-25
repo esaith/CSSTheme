@@ -132,8 +132,7 @@
                 { Name: 'Detail Color 2', Property: ['detailcolor2'], Value: baseMainColors.detailcolor2 },
                 { Name: 'Detail Color 3', Property: ['detailcolor3'], Value: baseMainColors.detailcolor3 },
                 { Name: 'Detail Color 4', Property: ['detailcolor4'], Value: baseMainColors.detailcolor4 },
-                { Name: 'Detail Color 5', Property: ['detailcolor5'], Value: baseMainColors.detailcolor5 },
-                { Name: 'Lotmap Background Color', Property: ['lotmapBackgroundColor'], Value: baseMainColors.lotmapBackgroundColor }
+                { Name: 'Detail Color 5', Property: ['detailcolor5'], Value: baseMainColors.detailcolor5 }
             ]
         };
 
@@ -190,6 +189,48 @@
             ]
         };
         $scope.categories.push(treasureMap);
+
+        const floorplan = {
+            title: "Floor Plan",
+            id: "floorplan",
+            elements: [
+                { Name: 'Floorplan Specs - Title Color', Property: ['floorplanSpecsModal-color'] },
+                { Name: 'Floorplan Specs - Title Shadow Color', Property: ['floorplanSpecsTitle-textShadow'] },
+                { Name: 'Floorplan Specs - Border Color', Property: ['floorplanSpecsBorder-borderColor'] },
+                { Name: 'Floorplan Specs - Specs Value Color', Property: ['floorplanSpecValue-color'] },
+                { Name: 'Floorplan Specs - Specs Label Color', Property: ['floorplanSpec-color'] },
+                { Name: 'Floorplan Specs - Specs Text Shadow Color', Property: ['floorplanSpec-textShadow'] },
+            ]
+        };
+        $scope.categories.push(floorplan);
+
+        const lotmap = {
+            title: "Lot Map",
+            id: "lotmap",
+            elements: [
+                { Name: 'Background Color', Property: ['lotmap-backgroundColor'] },
+                { Name: '"View Full Map" Button - Color', Property: ['lotmap-fullMapButton-color'] },
+                { Name: '"View Full Map" Button - Background Color', Property: ['lotmap-fullMapButton-backgroundColor'] },
+                { Name: 'Favorite Color', Property: ['lotmap-favorite-color'] },
+                // { Name: 'Lot details color', Property: ['lotmap-lotDetails-color'] },
+                // { Name: 'Lot details background color', Property: ['lotmap-lotDetails-backgroundColor'] },
+                // { Name: 'Lot details title color', Property: ['lotmap-lotDetails-title-color'] },
+                // { Name: 'Lot details title background color', Property: ['lotmap-lotDetails-title-backgroundColor'] },
+                // { Name: 'Lot details field border color', Property: ['lotmap-lotDetails-field-borderColor'] },
+                // { Name: 'Lot details field background color', Property: ['lotmap-lotDetails-field-backgroundColor'] },
+                // { Name: 'Lot details field label color', Property: ['lotmap-lotDetails-field-label-color'] },
+                // { Name: 'Lot details field value color', Property: ['lotmap-lotDetails-field-value-color'] },
+                // { Name: 'Lot details Management Map borderColor', Property: ['lotmap-lotDetails-managementMap-borderColor'] },
+                // { Name: 'Lot Filter Color', Property: ['lotmap-filterOptions-color'] },
+                // { Name: 'Lot Filter background Color', Property: ['lotmap-filterOptions-backgroundColor'] },
+                // { Name: 'Lot Filter header bottom border color', Property: ['lotmap-filterOptions-header-bottomBorder'] },
+                // { Name: 'Lot Map Status top border color', Property: ['lotmap-status-topBorderColor'] },
+                // { Name: 'Lot Map Status text color', Property: ['lotmap-status-color'] },
+                // { Name: 'Lot Map Status selected lot stroke color', Property: ['lotmap-selectedLot-stroke'] },
+                // { Name: 'Lot Map Status selected lot fill color', Property: ['lotmap-selectedLot-fill'] },
+            ]
+        };
+        $scope.categories.push(lotmap);
 
         const globalHud = {
             title: "Global Hud",
@@ -312,19 +353,6 @@
         };
         $scope.categories.push(radialTextMenu);
 
-        const floorplan = {
-            title: "Floor Plan",
-            id: "floorplan",
-            elements: [
-                { Name: 'Floorplan Specs title shadow color', Property: ['floorplan-specs-titleShadow-color'] },
-                { Name: 'Floorplan Specs color', Property: ['floorplan-specs-color'] },
-                { Name: 'Floorplan Specs Info Shadow color', Property: ['floorplan-specs-infoShadow-color'] },
-                { Name: 'Floorplan Specs Info value color', Property: ['floorplan-specs-infoValue-color'] },
-                { Name: 'Floorplan Specs Info border color', Property: ['floorplan-specs-info-borderColor'] }
-            ]
-        };
-        $scope.categories.push(floorplan);
-
         const energyEfficiency = {
             title: "Energy Efficiency",
             id: "energyEfficiency",
@@ -424,34 +452,6 @@
             ]
         };
         $scope.categories.push(furniture);
-
-        const lotmap = {
-            title: "Lot Map",
-            id: "lotmap",
-            elements: [
-                { Name: 'Background Color', Property: ['lotmap-backgroundColor'] },
-                { Name: 'Favorite Color', Property: ['lotmap-favorite-color'] },
-                { Name: 'Fullmap color', Property: ['lotmap-fullMap-color'] },
-                { Name: 'Fullmap background color', Property: ['lotmap-fullMap-backgroundColor'] },
-                { Name: 'Lot details color', Property: ['lotmap-lotDetails-color'] },
-                { Name: 'Lot details background color', Property: ['lotmap-lotDetails-backgroundColor'] },
-                { Name: 'Lot details title color', Property: ['lotmap-lotDetails-title-color'] },
-                { Name: 'Lot details title background color', Property: ['lotmap-lotDetails-title-backgroundColor'] },
-                { Name: 'Lot details field border color', Property: ['lotmap-lotDetails-field-borderColor'] },
-                { Name: 'Lot details field background color', Property: ['lotmap-lotDetails-field-backgroundColor'] },
-                { Name: 'Lot details field label color', Property: ['lotmap-lotDetails-field-label-color'] },
-                { Name: 'Lot details field value color', Property: ['lotmap-lotDetails-field-value-color'] },
-                { Name: 'Lot details Management Map borderColor', Property: ['lotmap-lotDetails-managementMap-borderColor'] },
-                { Name: 'Lot Filter Color', Property: ['lotmap-filterOptions-color'] },
-                { Name: 'Lot Filter background Color', Property: ['lotmap-filterOptions-backgroundColor'] },
-                { Name: 'Lot Filter header bottom border color', Property: ['lotmap-filterOptions-header-bottomBorder'] },
-                { Name: 'Lot Map Status top border color', Property: ['lotmap-status-topBorderColor'] },
-                { Name: 'Lot Map Status text color', Property: ['lotmap-status-color'] },
-                { Name: 'Lot Map Status selected lot stroke color', Property: ['lotmap-selectedLot-stroke'] },
-                { Name: 'Lot Map Status selected lot fill color', Property: ['lotmap-selectedLot-fill'] },
-            ]
-        };
-        $scope.categories.push(lotmap);
 
         const brochure = {
             title: "Brochure",
